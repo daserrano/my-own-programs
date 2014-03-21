@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio_ext.h>
 
-char *menu(){
+void menu(){
 
-char *coche;
-	system("clear");
-	printf("-------------------------- \n");
-	printf("---   Driving My Car   --- \n");
-	printf("-------------------------- \n");
+    char coche[30];
+
+    system("clear");
+    printf("-------------------------- \n");
+    printf("---   Driving My Car   --- \n");
+    printf("-------------------------- \n");
 	
 	printf("\t\t What's your favourite car? \n");
-	scanf("\t\t %c \n", &coche);
-	
+	scanf(" %s", coche);
+	__fpurge(stdin);
+
 	printf("Well! You have chosen %s! Nice car!", coche);
+
 }
 
 
@@ -25,9 +29,15 @@ int main(int argc, char *argv[]){
     int a=0;
     char abandonar;
 
-    do{
 	menu();
+    do{
+	printf("¿Que deseas hacer?\n");
+	printf("\t\t 1. Acelerar\n");
+	printf("\t\t 2. Frenar\n");
+	printf("\t\t 3. Freno de mano\n");
+	printf("\t\t 4. Salir\n");
 	scanf(" %i", &a);
+	__fpurge(stdin);
 	accion = (enum opciones) a; 
 
 	switch(accion){ // En caso de que se seleccione una u otra hara cosas diferentes.
@@ -44,7 +54,7 @@ int main(int argc, char *argv[]){
 		break;
 
 	    case 4:
-		printf("¿Deseas abandonar? s/n");
+		printf("¿Deseas abandonar? s/n\n");
 		scanf(" %c", &abandonar);
 
 		if(abandonar == 's')
