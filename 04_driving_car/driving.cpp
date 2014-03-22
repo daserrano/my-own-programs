@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <stdio_ext.h>
 
-void menu(){
+#define N 10
 
-    char coche[30];
+char menu(char coche[N]){ 
 
     system("clear");
-    printf("-------------------------- \n");
-    printf("---   Driving My Car   --- \n");
-    printf("-------------------------- \n");
-	
-	printf("\t\t What's your favourite car? \n");
-	gets (coche);
-	__fpurge(stdin);
+    printf("+------------------------+ \n");
+    printf("|     Driving My Car     | \n");
+    printf("+------------------------+ \n");
 
-	printf("Well! You have chosen %s! Nice car!", coche);
+    printf(" \n What's your favourite car? \n");
+    gets (coche);  // Coge la informacion introducida por el usuario.
+    __fpurge(stdin);
+
+    return printf("Well! You have chosen %s !!! Nice car!\n", coche);
 
 }
 
@@ -27,45 +27,73 @@ int main(int argc, char *argv[]){
     enum opciones accion; // Una variable llamada accion con las opciones de la variable enum.
 
     int a=0;
+    static int velocidad = 0; // Se almacenan los cambios hechos en la llamada a la variable.
     char abandonar;
+    char coche[30];
 
-	menu();
+    menu(coche);
+
+
+    printf("What do you want?\n");
+    printf("\t\t 1. Accelerate\n");
+    printf("\t\t 2. Break\n");
+    printf("\t\t 3. Stop\n");
+    printf("\t\t 4. Exit\n");
+
     do{
-	printf("¿What do you want?\n");
-	printf("\t\t 1. Acelerar\n");
-	printf("\t\t 2. Frenar\n");
-	printf("\t\t 3. Freno de mano\n");
-	printf("\t\t 4. Salir\n");
 	scanf(" %i", &a);
 	__fpurge(stdin);
+	if(a > 4)
+	    printf("Possible options: 1-4\n\n");
+
 	accion = (enum opciones) a; 
 
 	switch(accion){ // En caso de que se seleccione una u otra hara cosas diferentes.
 	    case 1: 
-		printf("ACELERO\n");
+		velocidad += N;
+
+		if(velocidad <= 120)
+		    printf(" \t\t Velocity of %s : %i km/h\n", coche, velocidad);
+		else if(velocidad > 200){
+		    printf(" \t\t Your %s is burning! I have to go. Bye.\n\n", coche);
+		    return EXIT_SUCCESS;
+		}
+		else
+		    printf("\t\t YOU ARE SO FAST! %i km/h!!\n", velocidad);
+
 		break;
 
 	    case 2:
-		printf("FRENO\n");
+		if( velocidad > 0){
+		    velocidad -= N;
+		    printf(" \t\t Velocity of %s : %i km/h\n", coche, velocidad);
+		}
+		else 
+		    printf(" \t\t You are stopped!\n");
 		break;
 
 	    case 3:
-		printf("FRENO DE MANOOOO!\n");
+		velocidad = 0;
+		printf(" \t\t You have stopped your %s : %i km/h\n", coche, velocidad);
+
 		break;
 
 	    case 4:
-		printf("¿Deseas abandonar? s/n\n");
-		scanf(" %c", &abandonar);
 
-		if(abandonar == 's')
-		    return EXIT_SUCCESS;
+		printf("Do you want to exit? y/n\n");
+		do{
+		    scanf(" %c", &abandonar);
+		    __fpurge(stdin);
 
-		else
-		    break;
+		    if(abandonar == 'y' || abandonar == 'Y')
+			return EXIT_SUCCESS;
+		    else if(abandonar == 'n' || abandonar == 'N')
+			break;
+		    else
+			printf("You must introduce y or n\n");
+		}while(abandonar != 'y' || abandonar != 'Y' || abandonar != 'n' || abandonar != 'N');    
 	}
 
     }while(a);
-
-
 
 }
