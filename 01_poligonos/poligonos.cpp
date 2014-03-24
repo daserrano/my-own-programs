@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio_ext.h> 
 
 #define PI 3.1415
 
@@ -26,6 +27,7 @@ int main(){
 
     printf("\n\n elige una opcion: ");
     scanf(" %i", &opcion);
+    __fpurge(stdin);
   }while(opcion<1 || opcion>4);
 
   if(opcion<4)
