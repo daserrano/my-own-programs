@@ -8,7 +8,7 @@ void pintar_matriz(char matriz[MAX][MAX]){
     system("clear");
     for(int fila=0; fila<MAX; fila++){
 	for(int columna=0; columna < MAX; columna++)
-	    printf(" %c |", matriz[fila][columna]);
+	    printf(" %1c |", matriz[fila][columna]);
 	printf("\n");
     }
 }
@@ -24,13 +24,17 @@ void hacer_barcos(char matriz[MAX][MAX]){
     //pida los barcos
     do{ 
 	barco ++;
-	do{ hay_barco =false;
+	do{ hay_barco = false;
 	    pintar_matriz(matriz);
 	    //Dependiendo del tamaño, vamos a un lado u otro.
 	    switch(barco){
 		case 1: 
 		    printf("Insert column & file. 2 caracters: \n");
 		    scanf(" %c%i", &columna_letra, &fila);
+		    
+		    /*if( fila == 0 || columna == 0)
+			hacer_barcos(matriz);
+*/
 		    columna = columna_letra - 64;
 
 		    for(int veces=0; veces<2; veces++)
@@ -54,8 +58,6 @@ void hacer_barcos(char matriz[MAX][MAX]){
 			    matriz[fila][columna+veces] = '*';
 
 
-		    //  for(int veces=0; veces<3; veces++)
-		    //	matriz[fila][columna+veces] = '*';
 
 		    break;
 
@@ -99,20 +101,6 @@ void menu(){
     system("figlet HUNDIR LA FLOTA");
     system("figlet .........................");
 
-
-    printf("                                   \n");
-    printf("                                   \n");
-    printf("        /       /                    \n");
-    printf("       /   /   /                     \n");
-    printf("      /       /                      \n");
-    printf("     /   /   /                       \n");
-    printf("    /       /  '''                    \n");
-    printf("   /   /   /   '_'                    \n");
-    printf("  /       /     |                     \n");
-    printf(" /   /   /      |                     \n");
-
-scanf(" %i", &opcion); 
-system("clear");
 }
 
 
