@@ -29,7 +29,7 @@ double division(double numero1, double numero2){
 
 void error_operando( char *argv[2]){
 
-    fprintf(stderr, "Please, you must introduce + - * or / \n");
+    fprintf(stderr, "Please, you must introduce + - x or / \n");
     exit(EXIT_FAILURE);
 
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
 
 
     // If the user don't introduce + - x or /, the program exits.
-    if(operando != '+' && operando != '-' && operando != '*' && operando != '/')
+    if(operando != '+' && operando != '-' && operando != 'x' && operando != '/')
 	error_operando(argv);
 
     if(operando == '+') // When it's a sum
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
     else if(operando == '-') //When it's a subtraction, do this.
 	resultado =	resta(numero1, numero2);
 
-    else if(operando == '*') //When it's a mutiplication.
+    else if(operando == 'x') //When it's a mutiplication.
 	resultado =	multiplicacion(numero1, numero2);
 
     else if(operando == '/') // And when it's a division.
